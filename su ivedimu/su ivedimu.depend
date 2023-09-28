@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1695931322 source:c:\users\administrator\desktop\cc++++\su ivedimu\main.cpp
+	<iostream>
+	<vector>
+	<string>
+	<limits>
+
