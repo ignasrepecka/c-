@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1695948550 source:c:\users\administrator\desktop\cc++++\v0,1\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+	<string>
+	<limits>
+	<algorithm>
+	<iomanip>
+	<cstdlib>
+	<ctime>
+
