@@ -62,19 +62,12 @@ int main()
         std::cout << "pavarde:" ;
         std::getline(std::cin, pavarde);
 
-        cout << "vardas      " << "pavarde       ";
+        cout << "vardas      " << "pavarde       " << "vidurkis/mediana";
+        cout << endl;
 
         if (a == 1) {
-            cout << "vidurkis";
-            cout << endl;
-            cout << "------------------------------------------";
-            cout << endl;
             cout << vardas << "     " << pavarde << "       " << fixed << setprecision(2) << suma/(n+1);
         } else if (a == 2) {
-            cout << "mediana";
-            cout << endl;
-            cout << "------------------------------------------";
-            cout << endl;
             cout << vardas << "     " << pavarde << "       " << mediana;
         } else {
             cout << "blogas pasirinkimas";
@@ -114,19 +107,12 @@ int main()
           std::cout << "pavarde:" ;
           std::getline(std::cin, pavarde);
 
-          cout << "vardas      " << "pavarde       ";
+          cout << "vardas      " << "pavarde       " << "vidurkis/mediana";
+          cout << endl;
 
            if (a == 1) {
-               cout << "vidurkis";
-               cout << endl;
-               cout << "------------------------------------------";
-               cout << endl;
                cout << vardas << "     " << pavarde << "       " << fixed << setprecision(2) << suma/(n+1);
            } else if (a == 2) {
-               cout << "mediana";
-               cout << endl;
-               cout << "------------------------------------------";
-               cout << endl;
                cout << vardas << "     " << pavarde << "       " << mediana;
            } else {
                cout << "blogas pasirinkimas";
@@ -143,7 +129,7 @@ int main()
                 balai.push_back(j);
             }
             int egz;
-            failas >> egz; // read the additional integer from the file
+            failas >> egz; 
             balai.push_back(egz);
 
             double suma = 0;
@@ -176,4 +162,3 @@ int main()
 
     return 0;
 }
-
