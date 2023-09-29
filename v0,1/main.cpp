@@ -22,6 +22,10 @@ int main()
 
     string vardas, pavarde;
 
+    int a;
+    cout << "ką pasirinksite?: 1 - Vidurkis, 2 - Mediana: ";
+    cin >> a;
+
     if (b == 1) {
         std::vector<int> balai;
         std::cout <<"rezultatai: ";
@@ -30,6 +34,10 @@ int main()
             std::cin >> j;
             balai.push_back(j);
         }
+        int egz;
+        std::cout << "Egzamino balas: ";
+        std::cin >> egz;
+        balai.push_back(egz);
         std::cout << std::endl;
 
         double suma = 0;
@@ -39,10 +47,10 @@ int main()
 
         sort(balai.begin(), balai.end());
         double mediana;
-        if (n % 2 == 0)
-            mediana = (balai[n/2 - 1] + balai[n/2]) / 2.0;
+        if ((n+1) % 2 == 0)
+            mediana = (balai[(n+1)/2 - 1] + balai[(n+1)/2]) / 2.0;
         else
-            mediana = balai[n/2];
+            mediana = balai[(n+1)/2];
 
         std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -54,10 +62,6 @@ int main()
         std::cout << "pavarde:" ;
         std::getline(std::cin, pavarde);
 
-        int a;
-        cout << "ką pasirinksite?: 1 - Vidurkis, 2 - Mediana: ";
-        cin >> a;
-
         cout << "vardas      " << "pavarde       ";
 
         if (a == 1) {
@@ -65,7 +69,7 @@ int main()
             cout << endl;
             cout << "------------------------------------------";
             cout << endl;
-            cout << vardas << "     " << pavarde << "       " << fixed << setprecision(2) << suma/n;
+            cout << vardas << "     " << pavarde << "       " << fixed << setprecision(2) << suma/(n+1);
         } else if (a == 2) {
             cout << "mediana";
             cout << endl;
@@ -76,60 +80,59 @@ int main()
             cout << "blogas pasirinkimas";
         }
     } else if (b == 2) {
-        std::vector<int> balai;
-        std::cout <<"rezultatai: ";
-        for(int i = 0; i < n; ++i) {
-            int j = rand() % 10 + 1;
-            balai.push_back(j);
-            std::cout << j << " ";
-        }
-        std::cout << std::endl;
-
-         double suma = 0;
-         for(int j : balai) {
-             suma += j;
+         std::vector<int> balai;
+         std::cout <<"rezultatai: ";
+         for(int i = 0; i < n; ++i) {
+             int j = rand() % 10 + 1;
+             balai.push_back(j);
+             std::cout << j << " ";
          }
+         int egz = rand() % 10 + 1;
+         balai.push_back(egz);
+         std::cout << egz;
+         std::cout << std::endl;
 
-         sort(balai.begin(), balai.end());
-         double mediana;
-         if (n % 2 == 0)
-             mediana = (balai[n/2 - 1] + balai[n/2]) / 2.0;
-         else
-             mediana = balai[n/2];
-
-         std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-         std::cout << "vardas:" ;
-         std::getline(std::cin, vardas);
-
-         std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
-
-         std::cout << "pavarde:" ;
-         std::getline(std::cin, pavarde);
-
-         int a;
-         cout << "ką pasirinksite?: 1 - Vidurkis, 2 - Mediana: ";
-         cin >> a;
-
-         cout << "vardas      " << "pavarde       ";
-
-          if (a == 1) {
-              cout << "vidurkis";
-              cout << endl;
-              cout << "------------------------------------------";
-              cout << endl;
-              cout << vardas << "     " << pavarde << "       " << fixed << setprecision(2) << suma/n;
-          } else if (a == 2) {
-              cout << "mediana";
-              cout << endl;
-              cout << "------------------------------------------";
-              cout << endl;
-              cout << vardas << "     " << pavarde << "       " << mediana;
-          } else {
-              cout << "blogas pasirinkimas";
+          double suma = 0;
+          for(int j : balai) {
+              suma += j;
           }
+
+          sort(balai.begin(), balai.end());
+          double mediana;
+          if ((n+1) % 2 == 0)
+              mediana = (balai[(n+1)/2 - 1] + balai[(n+1)/2]) / 2.0;
+          else
+              mediana = balai[(n+1)/2];
+
+          std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+          std::cout << "vardas:" ;
+          std::getline(std::cin, vardas);
+
+          std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+          std::cout << "pavarde:" ;
+          std::getline(std::cin, pavarde);
+
+          cout << "vardas      " << "pavarde       ";
+
+           if (a == 1) {
+               cout << "vidurkis";
+               cout << endl;
+               cout << "------------------------------------------";
+               cout << endl;
+               cout << vardas << "     " << pavarde << "       " << fixed << setprecision(2) << suma/(n+1);
+           } else if (a == 2) {
+               cout << "mediana";
+               cout << endl;
+               cout << "------------------------------------------";
+               cout << endl;
+               cout << vardas << "     " << pavarde << "       " << mediana;
+           } else {
+               cout << "blogas pasirinkimas";
+           }
     } else if (b == 3) {
-        cout << "vardas      " << "pavarde       " << "vidurkis";
+        cout << "vardas      " << "pavarde       " << "vidurkis/mediana";
         cout << endl;
         ifstream failas("C:\\Users\\Administrator\\Desktop\\studentai10000.txt");
         while(failas >> vardas >> pavarde){
@@ -139,6 +142,9 @@ int main()
                 failas >> j;
                 balai.push_back(j);
             }
+            int egz;
+            failas >> egz; // read the additional integer from the file
+            balai.push_back(egz);
 
             double suma = 0;
             for(int j : balai) {
@@ -147,11 +153,20 @@ int main()
 
             sort(balai.begin(), balai.end());
             double mediana;
-            if (n % 2 == 0)
-                mediana = (balai[n/2 - 1] + balai[n/2]) / 2.0;
+            if ((n+1) % 2 == 0)
+                mediana = (balai[(n+1)/2 - 1] + balai[(n+1)/2]) / 2.0;
             else
-                mediana = balai[n/2];
-            cout << vardas << "     " << pavarde << "       " << fixed << setprecision(2) << suma/n;
+                mediana = balai[(n+1)/2];
+
+
+
+            if (a == 1) {
+                cout << vardas << "     " << pavarde << "       " << fixed << setprecision(2) << suma/(n+1);
+            } else if (a == 2) {
+                cout << vardas << "     " << pavarde << "       " << mediana;
+            } else {
+                cout << "blogas pasirinkimas";
+            }
             cout << endl;
         }
         failas.close();
