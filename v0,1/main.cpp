@@ -61,14 +61,13 @@ int main()
 
         std::cout << "pavarde:" ;
         std::getline(std::cin, pavarde);
-
-        cout << "vardas      " << "pavarde       " << "vidurkis/mediana";
+        cout << setw(10) << left << "vardas" << setw(10) << left << "pavarde" << setw(10) << left << "vidurkis/mediana";
         cout << endl;
 
         if (a == 1) {
-            cout << vardas << "     " << pavarde << "       " << fixed << setprecision(2) << suma/(n+1);
+            cout << setw(10) << left << vardas << setw(10) << left << pavarde << setw(10) << left << fixed << setprecision(2) << suma/(n+1);
         } else if (a == 2) {
-            cout << vardas << "     " << pavarde << "       " << mediana;
+            cout << setw(10) << left << vardas << setw(10)<< left << pavarde << setw(10) << left << mediana;
         } else {
             cout << "blogas pasirinkimas";
         }
@@ -106,19 +105,18 @@ int main()
 
           std::cout << "pavarde:" ;
           std::getline(std::cin, pavarde);
-
-          cout << "vardas      " << "pavarde       " << "vidurkis/mediana";
+          cout << setw(10) << left << "vardas" << setw(10) << left << "pavarde" << setw(10) << left << "vidurkis/mediana";
           cout << endl;
 
            if (a == 1) {
-               cout << vardas << "     " << pavarde << "       " << fixed << setprecision(2) << suma/(n+1);
+               cout << setw(10) << left << vardas << setw(10) << left << pavarde << setw(10) << left << fixed << setprecision(2) << suma/(n+1);
            } else if (a == 2) {
-               cout << vardas << "     " << pavarde << "       " << mediana;
+               cout << setw(10) << left << vardas << setw(10)<< left << pavarde << setw(10) << left << mediana;
            } else {
                cout << "blogas pasirinkimas";
            }
     } else if (b == 3) {
-        cout << "vardas      " << "pavarde       " << "vidurkis/mediana";
+        cout << setw(10) << left << "vardas" << setw(10) << left << "pavarde" << setw(10) << left << "vidurkis/mediana";
         cout << endl;
         ifstream failas("C:\\Users\\Administrator\\Desktop\\studentai10000.txt");
         while(failas >> vardas >> pavarde){
@@ -129,7 +127,7 @@ int main()
                 balai.push_back(j);
             }
             int egz;
-            failas >> egz; 
+            failas >> egz;
             balai.push_back(egz);
 
             double suma = 0;
@@ -147,9 +145,9 @@ int main()
 
 
             if (a == 1) {
-                cout << vardas << "     " << pavarde << "       " << fixed << setprecision(2) << suma/(n+1);
+                cout << setw(10) << left << vardas << setw(10) << left << pavarde << setw(10) << left << fixed << setprecision(2) << suma/(n+1);
             } else if (a == 2) {
-                cout << vardas << "     " << pavarde << "       " << mediana;
+                cout << setw(10) << left << vardas << setw(10)<< left << pavarde << setw(10) << left << mediana;
             } else {
                 cout << "blogas pasirinkimas";
             }
@@ -162,3 +160,4 @@ int main()
 
     return 0;
 }
+
