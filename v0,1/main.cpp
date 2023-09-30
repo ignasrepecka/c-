@@ -18,7 +18,7 @@ int main()
     std::cin >> n;
 
     int b;
-    cout << "Ką pasirinksite?: 1 - Įvesti ranka, 2 - Generuoti atsitiktinai: ";
+    cout << "Ką pasirinksite?: 1 - Įvesti ranka, 2 - Generuoti atsitiktinai, 3 - Skaityti iš failo:";
     cin >> b;
 
     int a;
@@ -29,7 +29,7 @@ int main()
 
     if (b == 1) {
         for(int i = 0; i < n; ++i) {
-            // Your logic for option 1 goes here
+
             string vardas, pavarde;
             std::vector<int> balai;
 
@@ -82,7 +82,7 @@ int main()
     }
     else if (b == 2) {
         for(int i = 0; i < n; ++i) {
-            // Your logic for option 2 goes here
+
             string vardas, pavarde;
             std::vector<int> balai;
 
@@ -129,26 +129,22 @@ int main()
     }
     else if (b == 3) {
         ifstream failas("C:\\Users\\Administrator\\Desktop\\studentai10000.txt");
-        while(failas >> vardas >> pavarde){
-            std::vector<int> balai;
+        string line;
+        while (std::getline(failas, line)) {
+            std::istringstream iss(line);
+            iss >> vardas >> pavarde;
 
-            while(true) {
-                int j;
-                if(!(failas >> j)) {
-                    failas.clear();
-                    failas.ignore(numeric_limits<streamsize>::max(), '\n');
-                    break;
-                }
+            std::vector<int> balai;
+            int j;
+            while (iss >> j) {
                 balai.push_back(j);
             }
-            int egz = balai.back(); // The last score is the exam score
-            balai.pop_back(); // Remove the exam score from the scores vector
 
             double suma = 0;
             for(int j : balai) {
                 suma += j;
             }
-
+            
             sort(balai.begin(), balai.end());
             double mediana;
             if ((balai.size()) % 2 == 0)
