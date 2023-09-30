@@ -7,6 +7,7 @@
 #include <iomanip>
 #include <cstdlib>
 #include <ctime>
+
 using namespace std;
 
 int main()
@@ -24,11 +25,14 @@ int main()
     cout << "Ką pasirinksite?: 1 - Vidurkis, 2 - Mediana: ";
     cin >> a;
 
-    for(int i = 0; i < n; ++i) {
-        string vardas, pavarde;
-        std::vector<int> balai;
+    string vardas, pavarde;
 
-        if (b == 1) {
+    if (b == 1) {
+        for(int i = 0; i < n; ++i) {
+            // Your logic for option 1 goes here
+            string vardas, pavarde;
+            std::vector<int> balai;
+
             std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
             std::cout << "Vardas:" ;
             std::getline(std::cin, vardas);
@@ -75,7 +79,13 @@ int main()
                 cout << "Blogas pasirinkimas";
             }
         }
-        else if (b == 2) {
+    }
+    else if (b == 2) {
+        for(int i = 0; i < n; ++i) {
+            // Your logic for option 2 goes here
+            string vardas, pavarde;
+            std::vector<int> balai;
+
             std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
             std::cout << "Vardas:" ;
             std::getline(std::cin, vardas);
@@ -114,29 +124,29 @@ int main()
             } else {
                 cout << "Blogas pasirinkimas";
             }
-        }
-        else if (b == 3) {
-            cout << setw(15) << left << "vardas" << setw(15) << left << "pavarde" << setw(15) << left << "vidurkis/mediana";
-            cout << endl;
-            ifstream failas("C:\\Users\\Administrator\\Desktop\\studentai10000.txt");
-            while(failas >> vardas >> pavarde){
-                std::vector<int> balai;
 
-                while(true) {
-                    int j;
-                    if(!(failas >> j)) {
-                        failas.clear();
-                        failas.ignore(numeric_limits<streamsize>::max(), '\n');
-                        break;
-                    }
-                    balai.push_back(j);
+        }
+    }
+    else if (b == 3) {
+        ifstream failas("C:\\Users\\Administrator\\Desktop\\studentai10000.txt");
+        while(failas >> vardas >> pavarde){
+            std::vector<int> balai;
+
+            while(true) {
+                int j;
+                if(!(failas >> j)) {
+                    failas.clear();
+                    failas.ignore(numeric_limits<streamsize>::max(), '\n');
+                    break;
                 }
+                balai.push_back(j);
+            }
             int egz = balai.back(); // The last score is the exam score
             balai.pop_back(); // Remove the exam score from the scores vector
 
             double suma = 0;
             for(int j : balai) {
-            suma += j;
+                suma += j;
             }
 
             sort(balai.begin(), balai.end());
@@ -156,6 +166,5 @@ int main()
             cout << endl;
         }
         failas.close();
-    }
     }
 }
