@@ -1,0 +1,55 @@
+# depslib dependency file v1.0
+1696161023 source:c:\users\administrator\desktop\cc++++\v0.1 release\generuoti.cpp
+	<iostream>
+	<vector>
+	<string>
+	<limits>
+	<algorithm>
+	<iomanip>
+	<stdexcept>
+	"generuoti.h"
+
+1696161023 c:\users\administrator\desktop\cc++++\v0.1 release\generuoti.h
+	<vector>
+	<string>
+
+1696161023 source:c:\users\administrator\desktop\cc++++\v0.1 release\ivesti.cpp
+	<iostream>
+	<vector>
+	<string>
+	<limits>
+	<algorithm>
+	<iomanip>
+	<stdexcept>
+	"ivesti.h"
+
+1696161023 c:\users\administrator\desktop\cc++++\v0.1 release\ivesti.h
+	<vector>
+	<string>
+
+1696161023 source:c:\users\administrator\desktop\cc++++\v0.1 release\main.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+	<stdexcept>
+	"studentai.h"
+
+1696161023 c:\users\administrator\desktop\cc++++\v0.1 release\studentai.h
+	<vector>
+	<string>
+
+1696161119 source:c:\users\administrator\desktop\cc++++\v0.1 release\failas.cpp
+	<iostream>
+	<vector>
+	<string>
+	<fstream>
+	<sstream>
+	<stdexcept>
+	<iomanip>
+	<algorithm>
+	"failas.h"
+
+1696161023 c:\users\administrator\desktop\cc++++\v0.1 release\failas.h
+	<vector>
+	<string>
+
