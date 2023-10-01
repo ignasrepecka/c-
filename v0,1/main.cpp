@@ -7,15 +7,17 @@
 #include <iomanip>
 #include <cstdlib>
 #include <ctime>
+#include <stdexcept>
+#include <cstring>
+
 
 using namespace std;
 
-int main()
-{
+int main() {
     srand(time(0));
     int n;
-    std::cout << "Kiek studentų?: ";
-    std::cin >> n;
+    cout << "Kiek studentų?: ";
+    cin >> n;
 
     int b;
     cout << "Ką pasirinksite?: 1 - Įvesti ranka, 2 - Generuoti atsitiktinai, 3 - Skaityti iš failo:";
@@ -27,140 +29,150 @@ int main()
 
     string vardas, pavarde;
 
-    if (b == 1) {
-        for(int i = 0; i < n; ++i) {
+    try {
+        if (b == 1) {
+            for(int i = 0; i < n; ++i) {
+                string vardas, pavarde;
+                vector<int> balai;
 
-            string vardas, pavarde;
-            std::vector<int> balai;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Vardas:" ;
+                getline(cin, vardas);
 
-            std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            std::cout << "Vardas:" ;
-            std::getline(std::cin, vardas);
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-            std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Pavardė:" ;
+                getline(cin, pavarde);
 
-            std::cout << "Pavardė:" ;
-            std::getline(std::cin, pavarde);
-            std::cout <<"Rezultatai (įveskite ne sveikąjį skaičių, kad sustabdytumėte): ";
-            while(true) {
-                int j;
-                if(!(std::cin >> j)) {
-                    std::cin.clear();
-                    std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                    break;
+                cout <<"Rezultatai (įveskite ne sveikąjį skaičių, kad sustabdytumėte): ";
+                while(true) {
+                    int j;
+                    if(!(cin >> j)) {
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        break;
+                    }
+                    balai.push_back(j);
                 }
-                balai.push_back(j);
-            }
-            int egz;
-            std::cout << "Egzamino rezultatas: ";
-            std::cin >> egz;
-            balai.push_back(egz);
-            std::cout << std::endl;
 
-            double suma = 0;
-            for(int j : balai) {
-                suma += j;
-            }
-
-            sort(balai.begin(), balai.end());
-            double mediana;
-            if ((balai.size()) % 2 == 0)
-                mediana = (balai[balai.size()/2 - 1] + balai[balai.size()/2]) / 2.0;
-            else
-                mediana = balai[balai.size()/2];
-
-
-            if (a == 1) {
-                cout << setw(15) << left << vardas << setw(15) << left << pavarde << setw(15) << left << fixed << setprecision(2) << suma/balai.size();
-            } else if (a == 2) {
-                cout << setw(15) << left << vardas << setw(15)<< left << pavarde << setw(15) << left << mediana;
+                int egz;
+                cout << "Egzamino rezultatas: ";
+                cin >> egz;
+                balai.push_back(egz);
                 cout << endl;
-            } else {
-                cout << "Blogas pasirinkimas";
+
+                double suma = 0;
+                for(int j : balai) {
+                    suma += j;
+                }
+
+                sort(balai.begin(), balai.end());
+                double mediana;
+                if ((balai.size()) % 2 == 0)
+                    mediana = (balai[balai.size()/2 - 1] + balai[balai.size()/2]) / 2.0;
+                else
+                    mediana = balai[balai.size()/2];
+
+                if (a == 1) {
+                    cout << setw(15) << left << vardas << setw(15) << left << pavarde << setw(15) << left << fixed << setprecision(2) << suma/balai.size();
+                } else if (a == 2) {
+                    cout << setw(15) << left << vardas << setw(15)<< left << pavarde << setw(15) << left << mediana;
+                    cout << endl;
+                } else {
+                    throw runtime_error("Neteisingas pasirinkimas a");
+                }
             }
         }
-    }
-    else if (b == 2) {
-        for(int i = 0; i < n; ++i) {
+        else if (b == 2) {
+            for(int i = 0; i < n; ++i) {
+                string vardas, pavarde;
+                vector<int> balai;
 
-            string vardas, pavarde;
-            std::vector<int> balai;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Vardas:" ;
+                getline(cin, vardas);
 
-            std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            std::cout << "Vardas:" ;
-            std::getline(std::cin, vardas);
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-            std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cout << "Pavardė:" ;
+                getline(cin, pavarde);
 
-            std::cout << "Pavardė:" ;
-            std::getline(std::cin, pavarde);
+                int num_results = rand() % 10 + 1;
+                for(int j = 0; j < num_results; ++j) {
+                    balai.push_back(rand() % 10 + 1);
+                }
 
+                int egz = rand() % 10 + 1;
+                balai.push_back(egz);
 
-            int num_results = rand() % 10 + 1;
-            for(int j = 0; j < num_results; ++j) {
-                balai.push_back(rand() % 10 + 1);
+                double suma = 0;
+                for(int j : balai) {
+                    suma += j;
+                }
+
+                sort(balai.begin(), balai.end());
+                double mediana;
+                if ((balai.size()) % 2 == 0)
+                    mediana = (balai[balai.size()/2 - 1] + balai[balai.size()/2]) / 2.0;
+                else
+                    mediana = balai[balai.size()/2];
+
+                if (a == 1) {
+                    cout << setw(15) << left << vardas << setw(15) << left << pavarde << setw(15) << left << fixed << setprecision(2) << suma/balai.size();
+                } else if (a == 2) {
+                    cout << setw(15) << left << vardas << setw(15)<< left << pavarde << setw(15) << left << mediana;
+                    cout << endl;
+                } else {
+                    throw runtime_error("Neteisingas pasirinkimas a");
+                }
+            }
+        }
+        else if (b == 3) {
+            ifstream failas("C:\\Users\\Administrator\\Desktop\\studentai10000.txt");
+            if (!failas.is_open()) {
+                throw runtime_error("Nepavyko atidaryti failo");
             }
 
-            int egz = rand() % 10 + 1;
-            balai.push_back(egz);
+            string line;
+            while (getline(failas, line)) {
+                istringstream iss(line);
+                iss >> vardas >> pavarde;
 
-            double suma = 0;
-            for(int j : balai) {
-                suma += j;
-            }
+                vector<int> balai;
+                int j;
+                while (iss >> j) {
+                    balai.push_back(j);
+                }
 
-            sort(balai.begin(), balai.end());
-            double mediana;
-            if ((balai.size()) % 2 == 0)
-                mediana = (balai[balai.size()/2 - 1] + balai[balai.size()/2]) / 2.0;
-            else
-                mediana = balai[balai.size()/2];
+                double suma = 0;
+                for(int j : balai) {
+                    suma += j;
+                }
 
-            if (a == 1) {
-                cout << setw(15) << left << vardas << setw(15) << left << pavarde << setw(15) << left << fixed << setprecision(2) << suma/balai.size();
-            } else if (a == 2) {
-                cout << setw(15) << left << vardas << setw(15)<< left << pavarde << setw(15) << left << mediana;
+                sort(balai.begin(), balai.end());
+                double mediana;
+                if ((balai.size()) % 2 == 0)
+                    mediana = (balai[balai.size()/2 - 1] + balai[balai.size()/2]) / 2.0;
+                else
+                    mediana = balai[balai.size()/2];
+
+                if (a == 1) {
+                    cout << setw(15) << left << vardas << setw(15) << left << pavarde << setw(15) << left << fixed << setprecision(2) << suma/balai.size();
+                } else if (a == 2) {
+                    cout << setw(15) << left << vardas << setw(15)<< left << pavarde << setw(15) << left << mediana;
+                } else {
+                    throw runtime_error("Neteisingas pasirinkimas a");
+                }
                 cout << endl;
-            } else {
-                cout << "Blogas pasirinkimas";
             }
-
+            failas.close();
+        }
+        else {
+            throw runtime_error("Neteisingas pasirinkimas");
         }
     }
-    else if (b == 3) {
-        ifstream failas("C:\\Users\\Administrator\\Desktop\\studentai10000.txt");
-        string line;
-        while (std::getline(failas, line)) {
-            std::istringstream iss(line);
-            iss >> vardas >> pavarde;
-
-            std::vector<int> balai;
-            int j;
-            while (iss >> j) {
-                balai.push_back(j);
-            }
-
-            double suma = 0;
-            for(int j : balai) {
-                suma += j;
-            }
-            
-            sort(balai.begin(), balai.end());
-            double mediana;
-            if ((balai.size()) % 2 == 0)
-                mediana = (balai[balai.size()/2 - 1] + balai[balai.size()/2]) / 2.0;
-            else
-                mediana = balai[balai.size()/2];
-
-            if (a == 1) {
-                cout << setw(15) << left << vardas << setw(15) << left << pavarde << setw(15) << left << fixed << setprecision(2) << suma/balai.size();
-            } else if (a == 2) {
-                cout << setw(15) << left << vardas << setw(15)<< left << pavarde << setw(15) << left << mediana;
-            } else {
-                cout << "blogas pasirinkimas";
-            }
-            cout << endl;
-        }
-        failas.close();
+    catch (const exception& e) {
+        cerr << "Klaida: " << e.what() << endl;
     }
+    return 0;
 }
