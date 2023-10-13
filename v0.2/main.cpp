@@ -15,16 +15,26 @@ struct Student {
     double score;
 };
 
-bool compare(const Student &a, const Student &b) {
+bool compareScore(const Student &a, const Student &b) {
     return a.score < b.score;
+}
+
+bool compareName(const Student &a, const Student &b) {
+    return a.vardas < b.vardas;
+}
+
+bool compareSurname(const Student &a, const Student &b) {
+    return a.pavarde < b.pavarde;
 }
 
 int main() {
     srand(time(0));
 
-    int a;
+    int a, b;
     cout << "Ką pasirinksite?: 1 - Vidurkis, 2 - Mediana: ";
     cin >> a;
+    cout << "Kaip rūšiuoti?: 1 - Pagal vardą, 2 - Pagal pavardę, 3 - Pagal vidurkį/medianą: ";
+    cin >> b;
 
     try {
         ifstream failas("C:\\Users\\Administrator\\Desktop\\cc++++\\v0.2\\studentai.txt");
@@ -65,11 +75,19 @@ int main() {
             } else {
                 throw runtime_error("Neteisingas pasirinkimas a");
             }
-            
+
             students.push_back(student);
         }
-        
-        sort(students.begin(), students.end(), compare);
+
+        if (b == 1) {
+            sort(students.begin(), students.end(), compareName);
+        } else if (b == 2) {
+            sort(students.begin(), students.end(), compareSurname);
+        } else if (b == 3) {
+            sort(students.begin(), students.end(), compareScore);
+        } else {
+            throw runtime_error("Neteisingas pasirinkimas b");
+        }
 
         for (const auto &student : students) {
             if (student.score < 5)
