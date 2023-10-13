@@ -9,34 +9,22 @@
 
 using namespace std;
 
+struct Student {
+    string vardas;
+    string pavarde;
+    double score;
+};
+
+bool compare(const Student &a, const Student &b) {
+    return a.score < b.score;
+}
+
 int main() {
     srand(time(0));
-
-    int n;
-    cout << "kiek studentu?";
-    cin >> n;
-
-    ofstream failas("studentai.txt");
-    if (!failas.is_open()) {
-        cerr << "Nepavyko atidaryti failo" << endl;
-        return 1;
-    }
-
-    for (int i = 1; i <= n; ++i) {
-        failas << "Vardas" << i << "\tPavarde" << i;
-        for (int j = 0; j < 15; ++j) {
-            failas << "\t" << rand() % 10 + 1;
-        }
-        failas << endl;
-    }
-
-    failas.close();
 
     int a;
     cout << "Ką pasirinksite?: 1 - Vidurkis, 2 - Mediana: ";
     cin >> a;
-
-    string vardas, pavarde;
 
     try {
         ifstream failas("C:\\Users\\Administrator\\Desktop\\cc++++\\v0.2\\studentai.txt");
@@ -45,10 +33,12 @@ int main() {
             throw runtime_error("Nepavyko atidaryti failo");
         }
 
+        vector<Student> students;
         string line;
         while (getline(failas, line)) {
             istringstream iss(line);
-            iss >> vardas >> pavarde;
+            Student student;
+            iss >> student.vardas >> student.pavarde;
 
             vector<int> balai;
             int j;
@@ -69,20 +59,25 @@ int main() {
                 mediana = balai[balai.size()/2];
 
             if (a == 1) {
-                double vidurkis = suma/balai.size();
-                if (vidurkis < 5)
-                    failas2 << setw(15) << left << vardas << setw(15) << left << pavarde << setw(15) << left << fixed << setprecision(2) << vidurkis << endl;
-                else
-                    failas1 << setw(15) << left << vardas << setw(15) << left << pavarde << setw(15) << left << fixed << setprecision(2) << vidurkis << endl;
+                student.score = suma/balai.size();
             } else if (a == 2) {
-                if (mediana < 5)
-                    failas2 << setw(15) << left << vardas << setw(15)<< left << pavarde << setw(15) << left << mediana << endl;
-                else
-                    failas1 << setw(15) << left << vardas << setw(15)<< left << pavarde << setw(15) << left << mediana << endl;
+                student.score = mediana;
             } else {
                 throw runtime_error("Neteisingas pasirinkimas a");
             }
+            
+            students.push_back(student);
         }
+        
+        sort(students.begin(), students.end(), compare);
+
+        for (const auto &student : students) {
+            if (student.score < 5)
+                failas2 << setw(15) << left << student.vardas << setw(15) << left << student.pavarde << setw(15) << left << fixed << setprecision(2) << student.score << endl;
+            else
+                failas1 << setw(15) << left << student.vardas << setw(15) << left << student.pavarde << setw(15) << left << fixed << setprecision(2) << student.score << endl;
+        }
+
         failas.close();
         failas1.close();
         failas2.close();
