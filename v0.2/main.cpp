@@ -19,7 +19,7 @@ int main() {
     string vardas, pavarde;
 
     try {
-        ifstream failas("C:\\Users\\Administrator\\Desktop\\studentai10000.txt");
+        ifstream failas("C:\\Users\\Administrator\\Desktop\\cc++++\\generavimas\\studentai.txt");
         ofstream failas1("protingi.txt"), failas2("durni.txt");
         if (!failas.is_open()) {
             throw runtime_error("Nepavyko atidaryti failo");
