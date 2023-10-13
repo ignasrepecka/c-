@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1697203927 source:c:\users\administrator\desktop\cc++++\generavimas\main.cpp
+	<iostream>
+	<fstream>
+	<cstdlib>
+	<ctime>
+
