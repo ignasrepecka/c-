@@ -12,6 +12,26 @@ using namespace std;
 int main() {
     srand(time(0));
 
+    int n;
+    cout << "kiek studentu?";
+    cin >> n;
+
+    ofstream failas("studentai.txt");
+    if (!failas.is_open()) {
+        cerr << "Nepavyko atidaryti failo" << endl;
+        return 1;
+    }
+
+    for (int i = 1; i <= n; ++i) {
+        failas << "Vardas" << i << "\tPavarde" << i;
+        for (int j = 0; j < 15; ++j) {
+            failas << "\t" << rand() % 10 + 1;
+        }
+        failas << endl;
+    }
+
+    failas.close();
+
     int a;
     cout << "Ką pasirinksite?: 1 - Vidurkis, 2 - Mediana: ";
     cin >> a;
@@ -19,7 +39,7 @@ int main() {
     string vardas, pavarde;
 
     try {
-        ifstream failas("C:\\Users\\Administrator\\Desktop\\cc++++\\generavimas\\studentai.txt");
+        ifstream failas("C:\\Users\\Administrator\\Desktop\\cc++++\\v0.2\\studentai.txt");
         ofstream failas1("protingi.txt"), failas2("durni.txt");
         if (!failas.is_open()) {
             throw runtime_error("Nepavyko atidaryti failo");
