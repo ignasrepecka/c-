@@ -88,27 +88,26 @@ int main() {
         auto duration = duration_cast<microseconds>(stop - start);
         cout << "Failo skaitymo laikas + siek tiek veiksmu: " << duration.count() << " mikrosekundes" << endl;
 
-        vector<Student> durni, protingi;
-        for (const auto &student : students) {
-            if (student.score < 5)
-                durni.push_back(student);
-            else
-                protingi.push_back(student);
-        }
+        vector<Student> durni;
+        auto it = remove_if(students.begin(), students.end(), &durni {
+            if (s.score < 5) {
+                durni.push_back(s);
+                return true;
+            }
+            return false;
+        });
+        students.erase(it, students.end());
 
         start = high_resolution_clock::now();
         if (b == 1) {
             sort(students.begin(), students.end(), compareName);
             sort(durni.begin(), durni.end(), compareName);
-            sort(protingi.begin(), protingi.end(), compareName);
         } else if (b == 2) {
             sort(students.begin(), students.end(), compareSurname);
             sort(durni.begin(), durni.end(), compareSurname);
-            sort(protingi.begin(), protingi.end(), compareSurname);
         } else if (b == 3) {
             sort(students.begin(), students.end(), compareScore);
             sort(durni.begin(), durni.end(), compareScore);
-            sort(protingi.begin(), protingi.end(), compareScore);
         } else {
             throw runtime_error("Neteisingas pasirinkimas b");
         }
@@ -120,7 +119,7 @@ int main() {
         for (const auto &student : durni) {
             failas2 << setw(15) << left << student.vardas << setw(15) << left << student.pavarde << setw(15) << left << fixed << setprecision(2) << student.score << endl;
         }
-        for (const auto &student : protingi) {
+        for (const auto &student : students) {
             failas1 << setw(15) << left << student.vardas << setw(15) << left << student.pavarde << setw(15) << left << fixed << setprecision(2) << student.score << endl;
         }
         stop = high_resolution_clock::now();
