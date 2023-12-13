@@ -39,14 +39,14 @@ int main() {
     cin >> b;
 
     try {
-        ifstream failas("C:\\Users\\Administrator\\Desktop\\studentai1000.txt");
+        ifstream failas("C:\\Users\\Administrator\\Desktop\\studentai100000.txt");
 
         ofstream failas1("protingi.txt"), failas2("durni.txt");
         if (!failas.is_open()) {
             throw runtime_error("Nepavyko atidaryti failo");
         }
 
-        list<Student> students, vargsiukai, kietiakai;
+        list<Student> students;
         string line;
         auto start = high_resolution_clock::now();
         while (getline(failas, line)) {
@@ -88,24 +88,39 @@ int main() {
         auto duration = duration_cast<microseconds>(stop - start);
         cout << "Failo skaitymo laikas + siek tiek veiksmu: " << duration.count() << " mikrosekundes" << endl;
 
+        list<Student> durni, protingi;
+        for (const auto &student : students) {
+            if (student.score < 5)
+                durni.push_back(student);
+            else
+                protingi.push_back(student);
+        }
+
         start = high_resolution_clock::now();
-        partition_copy(
-    begin(students), end(students),
-    back_inserter(vargsiukai), back_inserter(kietiakai),
-     { return s.score < 5 };
-);
-
-
-
+        if (b == 1) {
+            students.sort(compareName);
+            durni.sort(compareName);
+            protingi.sort(compareName);
+        } else if (b == 2) {
+            students.sort(compareSurname);
+            durni.sort(compareSurname);
+            protingi.sort(compareSurname);
+        } else if (b == 3) {
+            students.sort(compareScore);
+            durni.sort(compareScore);
+            protingi.sort(compareScore);
+        } else {
+            throw runtime_error("Neteisingas pasirinkimas b");
+        }
         stop = high_resolution_clock::now();
         duration = duration_cast<microseconds>(stop - start);
         cout << "rusiavimo laikas: " << duration.count() << " mikrosekundes" << endl;
 
         start = high_resolution_clock::now();
-        for (const auto &student : vargsiukai) {
+        for (const auto &student : durni) {
             failas2 << setw(15) << left << student.vardas << setw(15) << left << student.pavarde << setw(15) << left << fixed << setprecision(2) << student.score << endl;
         }
-        for (const auto &student : kietiakai) {
+        for (const auto &student : protingi) {
             failas1 << setw(15) << left << student.vardas << setw(15) << left << student.pavarde << setw(15) << left << fixed << setprecision(2) << student.score << endl;
         }
         stop = high_resolution_clock::now();
