@@ -1,6 +1,6 @@
 #include <iostream>
 #include <fstream>
-#include <vector>
+#include <list>
 #include <string>
 #include <algorithm>
 #include <iomanip>
@@ -46,7 +46,7 @@ int main() {
             throw runtime_error("Nepavyko atidaryti failo");
         }
 
-        vector<Student> students;
+        list<Student> students;
         string line;
         auto start = high_resolution_clock::now();
         while (getline(failas, line)) {
@@ -54,7 +54,7 @@ int main() {
             Student student;
             iss >> student.vardas >> student.pavarde;
 
-            vector<int> balai;
+            list<int> balai;
             int j;
             while (iss >> j) {
                 balai.push_back(j);
@@ -65,7 +65,7 @@ int main() {
                 suma += j;
             }
 
-            sort(balai.begin(), balai.end());
+            balai.sort();
             double mediana;
             auto it = balai.begin();
             advance(it, balai.size()/2);
@@ -88,7 +88,7 @@ int main() {
         auto duration = duration_cast<microseconds>(stop - start);
         cout << "Failo skaitymo laikas + siek tiek veiksmu: " << duration.count() << " mikrosekundes" << endl;
         start = high_resolution_clock::now();
-        vector<Student> durni;
+        list<Student> durni;
         for (auto it = students.begin(); it != students.end(); /* no increment here */) {
             if (it->score < 5) {
                 durni.push_back(*it);
@@ -100,14 +100,14 @@ int main() {
 
 
         if (b == 1) {
-            sort(students.begin(), students.end(), compareName);
-            sort(durni.begin(), durni.end(), compareName);
+            students.sort(compareName);
+            durni.sort(compareName);
         } else if (b == 2) {
-            sort(students.begin(), students.end(), compareSurname);
-            sort(durni.begin(), durni.end(), compareSurname);
+            students.sort(compareSurname);
+            durni.sort(compareSurname);
         } else if (b == 3) {
-            sort(students.begin(), students.end(), compareScore);
-            sort(durni.begin(), durni.end(), compareScore);
+            students.sort(compareScore);
+            durni.sort(compareScore);
         } else {
             throw runtime_error("Neteisingas pasirinkimas b");
         }
