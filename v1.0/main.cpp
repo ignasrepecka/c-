@@ -29,6 +29,10 @@ bool compareSurname(const Student &a, const Student &b) {
     return a.pavarde < b.pavarde;
 }
 
+bool isDurni(const Student &s) {
+    return s.score < 5;
+}
+
 int main() {
     srand(time(0));
 
@@ -87,17 +91,13 @@ int main() {
         auto stop = high_resolution_clock::now();
         auto duration = duration_cast<microseconds>(stop - start);
         cout << "Failo skaitymo laikas + siek tiek veiksmu: " << duration.count() << " mikrosekundes" << endl;
-        start = high_resolution_clock::now();
-        list<Student> durni;
-        for (auto it = students.begin(); it != students.end(); /* no increment here */) {
-            if (it->score < 5) {
-                durni.push_back(*it);
-                it = students.erase(it);  // erase returns the iterator to the next element
-            } else {
-                ++it;
-            }
-        }
 
+        start = high_resolution_clock::now();
+
+        list<Student> durni;
+        auto it = partition(students.begin(), students.end(), isDurni);
+        copy(it, students.end(), back_inserter(durni));
+        students.erase(it, students.end());
 
         if (b == 1) {
             students.sort(compareName);
