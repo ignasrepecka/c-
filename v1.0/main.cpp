@@ -87,7 +87,7 @@ int main() {
         auto stop = high_resolution_clock::now();
         auto duration = duration_cast<microseconds>(stop - start);
         cout << "Failo skaitymo laikas + siek tiek veiksmu: " << duration.count() << " mikrosekundes" << endl;
-
+        start = high_resolution_clock::now();
         vector<Student> durni;
         for (auto it = students.begin(); it != students.end(); /* no increment here */) {
             if (it->score < 5) {
@@ -98,7 +98,7 @@ int main() {
             }
         }
 
-        start = high_resolution_clock::now();
+
         if (b == 1) {
             sort(students.begin(), students.end(), compareName);
             sort(durni.begin(), durni.end(), compareName);
