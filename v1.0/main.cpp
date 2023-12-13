@@ -89,14 +89,14 @@ int main() {
         cout << "Failo skaitymo laikas + siek tiek veiksmu: " << duration.count() << " mikrosekundes" << endl;
 
         vector<Student> durni;
-        auto it = remove_if(students.begin(), students.end(), &durni {
-            if (s.score < 5) {
-                durni.push_back(s);
-                return true;
+        for (auto it = students.begin(); it != students.end(); /* no increment here */) {
+            if (it->score < 5) {
+                durni.push_back(*it);
+                it = students.erase(it);  // erase returns the iterator to the next element
+            } else {
+                ++it;
             }
-            return false;
-        });
-        students.erase(it, students.end());
+        }
 
         start = high_resolution_clock::now();
         if (b == 1) {
